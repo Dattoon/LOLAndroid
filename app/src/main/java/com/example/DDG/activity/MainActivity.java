@@ -1,13 +1,12 @@
 package com.example.DDG.activity;
 
-import static android.os.Build.VERSION_CODES.R;
-
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.DDG.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
-
+        finish(); // Đóng MainActivity để tránh quay lại màn hình này khi nhấn back
     }
 }
