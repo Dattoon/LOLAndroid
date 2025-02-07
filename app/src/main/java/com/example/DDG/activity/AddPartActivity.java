@@ -1,4 +1,4 @@
-package com.example.quanlyphutungthaythe.activity;
+package com.example.DDG.activity;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -6,39 +6,33 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.quanlyphutungthaythe.R;
-import com.example.quanlyphutungthaythe.model.Part;
-import com.example.quanlyphutungthaythe.sqlite.PartDAO;
+import com.example.DDG.R;
+import com.example.DDG.model.Part;
+import com.example.DDG.sqlite.PartDAO;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class UpdateDeletePartActivity extends AppCompatActivity {
+public class AddPartActivity extends AppCompatActivity {
 
+    private Button btnAdd, btnCancel;
     private TextInputEditText txtName, txtCategory, txtDescription, txtPrice;
     private TextInputLayout txtNameLayout, txtCategoryLayout, txtDescriptionLayout, txtPriceLayout;
-    private Button btnUpdate, btnDelete, btnCancel;
     private PartDAO _partDAO;
-    private Part _part;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_update_delete_part);
+        setContentView(R.layout.activity_add_part);
 
         addView();
         addEvent();
-        loadData();
     }
 
     private void addView(){
         _partDAO = new PartDAO(this);
-        btnUpdate =  findViewById(R.id.btnUpdate);
-        btnDelete = findViewById(R.id.btnDelete);
+        btnAdd =  findViewById(R.id.btnAdd);
         btnCancel = findViewById(R.id.btnCancel);
 
         txtName = findViewById(R.id.txtName);
@@ -50,36 +44,27 @@ public class UpdateDeletePartActivity extends AppCompatActivity {
         txtCategoryLayout = findViewById(R.id.txtCategoryLayout);
         txtDescriptionLayout = findViewById(R.id.txtDescriptionLayout);
         txtPriceLayout = findViewById(R.id.txtPriceLayout);
-
-        _part = (Part) getIntent().getSerializableExtra("part");
-        txtName.setText(_part.getName());
-        txtCategory.setText(_part.getCategory());
-        txtDescription.setText(_part.getDescription());
-        txtPrice.setText(_part.getPrice()+"");
     }
 
     private void addEvent(){
-        btnUpdate.setOnClickListener(view -> {
+        btnAdd.setOnClickListener(view -> {
             if (validate()) {
-                _partDAO.updatePart(new Part(_part.getId(), txtName.getText().toString(), txtCategory.getText().toString(),
+                var result = _partDAO.addPart(new Part(0, txtName.getText().toString(), txtCategory.getText().toString(),
                         txtDescription.getText().toString(), Float.parseFloat(txtPrice.getText().toString())));
-                Toast.makeText(this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
-                finish();
+                if (result){
+                    Toast.makeText(this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                    clearInput();
+                }
+                else {
+                    Toast.makeText(this, "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                }
             }
-        });
-        btnDelete.setOnClickListener(view -> {
-            _partDAO.deletePart(_part.getId());
-            Toast.makeText(this, "Xóa thành công", Toast.LENGTH_SHORT).show();
-            finish();
         });
         btnCancel.setOnClickListener(view -> {
             finish();
         });
     }
 
-    private void loadData(){
-
-    }
     private boolean validate(){
         boolean result = true;
 
@@ -105,4 +90,13 @@ public class UpdateDeletePartActivity extends AppCompatActivity {
 
         return result;
     }
+
+    private void clearInput(){
+        txtName.setText("");
+        txtCategory.setText("");
+        txtDescription.setText("");
+        txtPrice.setText("");
+
+    }
+
 }

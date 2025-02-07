@@ -1,11 +1,11 @@
-package com.example.quanlyphutungthaythe.sqlite;
+package com.example.DDG.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.quanlyphutungthaythe.model.Part;
+import com.example.DDG.model.Part;
 
 import java.util.ArrayList;
 import java.util.List;

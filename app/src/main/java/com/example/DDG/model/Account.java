@@ -1,4 +1,4 @@
-package com.example.quanlyphutungthaythe.model;
+package com.example.DDG.model;
 
 public class Account {
     String useName;

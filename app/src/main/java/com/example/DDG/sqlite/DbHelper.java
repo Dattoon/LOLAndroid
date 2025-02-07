@@ -1,4 +1,4 @@
-package com.example.quanlyphutungthaythe.sqlite;
+package com.example.DDG.sqlite;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

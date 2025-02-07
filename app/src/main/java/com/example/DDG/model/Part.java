@@ -1,4 +1,4 @@
-package com.example.quanlyphutungthaythe.model;
+package com.example.DDG.model;
 
 import java.io.Serializable;
 

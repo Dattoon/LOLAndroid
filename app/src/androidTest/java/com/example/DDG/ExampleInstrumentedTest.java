@@ -1,4 +1,4 @@
-package com.example.quanlyphutungthaythe;
+package com.example.DDG;
 
 import android.content.Context;
 
